@@ -16,6 +16,7 @@ def run():
     global sock
 
     difficulty = int(os.environ['difficulty'] if ('difficulty' in os.environ) else 4)
+
     nodeName = socket.gethostname()
     print("The difficulty is {}".format(difficulty))
     
@@ -32,6 +33,8 @@ def run():
                 'time': str(datetime.datetime.now()),
                 'difficulty': str(difficulty)
             }
+
+            # body = ""
 
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.connect(('192.168.2.37', 9700))
