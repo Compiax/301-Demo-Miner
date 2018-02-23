@@ -1,0 +1,49 @@
+version: '3.1'
+
+services:
+  elasticsearch:
+    container_name: "elasticsearch"
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.2
+    hostname: elasticsearch
+    depends_on:
+      - logstash
+    environment:
+      - "discovery.type=single-node"
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - elk
+    restart: unless-stopped
+    tty: true
+
+  logstash:
+    container_name: "logstash"
+    image: docker.elastic.co/logstash/logstash-oss:6.2.2
+    hostname: logstash
+    ports:
+      - 9600:9600
+      - 9700:9700
+    networks:
+      - elk
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ../../docker/logstash/pipeline:/usr/share/logstash/pipeline
+
+  kibana:
+    container_name: "kibana"
+    hostname: kibana
+    depends_on:
+      - logstash
+      - elasticsearch
+    networks:
+      - elk
+    image: docker.elastic.co/kibana/kibana-oss:6.2.2
+    ports:
+      - 5601:5601
+
+networks:
+  elk:
+    external:
+      name: "elk"

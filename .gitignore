@@ -1,0 +1,12 @@
+# Keep .gitkeep files.
+!.gitkeep
+
+# Wildcards
+*~
+~*
+
+# Mac
+.DS_Store
+
+# Images
+*.img
