@@ -8,6 +8,5 @@
 # Mac
 .DS_Store
 
-# Python
-__pycache__
-.pytest_cache
+# Images
+*.img
