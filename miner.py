@@ -19,16 +19,16 @@ def hash(string: str):
 def run():
     global sock
 
-    difficulty = int(os.environ['difficulty'] if ('difficulty' in os.environ) else 4)
+    difficulty = int(os.environ['difficulty'] if ('difficulty' in os.environ) else 3)
     hostname = str(os.environ['hostname'] if ('hostname' in os.environ) else 'localhost')
-    
-    
+
+
 
     nodeName = socket.gethostname()
     print("The difficulty is {} ".format(difficulty))
     print("Sending output to {}:9700".format(hostname))
-    
-    
+
+
     while 1:
         string = getRandomString(25)
         thehash = hash(string)
